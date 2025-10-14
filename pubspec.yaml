@@ -1,5 +1,5 @@
 name: animated_digital_clock
-description: "A beautiful, customizable digital clock made of clocks inspired from {https://www.reddit.com/r/webdev/comments/1nrx5n9/clock_made_of_clocks/}. With Clock, timer and stopwatch functionality. Features animated transitions, multiple display modes, and extensive customization options."
+description: "Customizable animated digital clock made from clocks"
 version: 1.0.0
 homepage: https://github.com/raian-ruku/animated_digital_clock
 
