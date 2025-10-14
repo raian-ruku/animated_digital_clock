@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="animated_digital_clock API docs, for the Dart programming language.">
+  <title>animated_digital_clock - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://github.com/raian-ruku/animated_digital_clock">animated_digital_clock package</a></li>
+  </ol>
+  <div class="self-name">animated_digital_clock</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="animated-digital-clock">Animated Digital Clock</h1>
+<p><img src="https://img.shields.io/pub/v/animated_digital_clock" alt="Pub Version">
+<img src="https://img.shields.io/badge/license-MIT-blue" alt="License">
+<img src="https://img.shields.io/badge/Flutter-%2302569B.svg?style=flat&amp;logo=Flutter&amp;logoColor=white" alt="Flutter">
+<img src="https://img.shields.io/badge/Dart-0175C2?style=flat&amp;logo=dart&amp;logoColor=white" alt="Dart"></p>
+<p>A beautiful, customizable digital clock made of clocks inspired from this <a href="https://www.reddit.com/r/webdev/comments/1nrx5n9/clock_made_of_clocks/"><img src="https://img.shields.io/badge/Reddit-FF4500?style=flat&amp;logo=reddit&amp;logoColor=white" alt="Reddit"></a> post and this <a href="https://www.youtube.com/watch?v=VUSCH7nQGIM&amp;pp=wgIGCgQQAhgB"><img src="https://img.shields.io/badge/Youtube-FF0033?style=flat&amp;logo=youtube&amp;logoColor=white" alt="Youtube"></a> video. With <strong>Clock</strong>, <strong>timer</strong> and <strong>stopwatch</strong> functionality. Features animated transitions, multiple display modes, and extensive customization options.</p>
+<h2 id="-features">🎯 Features</h2>
+<ul>
+<li>🕒 <strong>Multiple Modes</strong>: Real-time clock, countdown timer, stopwatch, and static time display</li>
+<li>🎨 <strong>Fully Customizable</strong>: Colors, sizes, shadows, and animations</li>
+<li>⏰ <strong>12/24 Hour Format</strong>: Support for both time formats with AM/PM indicator</li>
+<li>🎯 <strong>Animated Transitions</strong>: Smooth clock hand movements</li>
+<li>🎮 <strong>Controller Support</strong>: Programmatic control for timer and stopwatch</li>
+<li>📱 <strong>Responsive Design</strong>: Adapts to different screen sizes</li>
+<li>🎪 <strong>Flexible Layout</strong>: Horizontal scrolling for small screens</li>
+<li>🔄 <strong>Static Time Display</strong>: Show specific times without updates</li>
+</ul>
+<h2 id="-preview">📸 Preview</h2>
+<p><img src="./assets/images/clock.gif" alt="Clock">
+<em>Real-time clock</em></p>
+<h2 id="-installation">📦 Installation</h2>
+<h3 id="add-dependency">Add dependency</h3>
+<p>Run this command:</p>
+<pre class="language-bash"><code class="language-bash">flutter pub add animated_digital_clock
+</code></pre>
+<p>This will add the following to your <code>pubspec.yaml</code>:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  animated_digital_clock: ^1.0.0
+</code></pre>
+<h3 id="import-the-package">Import the package</h3>
+<pre class="language-dart"><code class="language-dart">import 'package:animated_digital_clock/animated_digital_clock.dart';
+</code></pre>
+<h2 id="-quick-start">🚀 Quick Start</h2>
+<h3 id="basic-real-time-clock">Basic Real-time Clock</h3>
+<pre class="language-dart"><code class="language-dart">ClockWidget.clock(
+  clockSize: 15.0,
+  twelveHourFormat: true,
+  colors: ClockColors(backgroundColor: Colors.white)
+)
+</code></pre>
+<p><img src="./assets/images/clock.gif" alt="Clock"></p>
+<h3 id="countdown-timer">Countdown Timer</h3>
+<pre class="language-dart"><code class="language-dart">final controller = ClockController();
+
+ClockWidget.timer(
+  clockSize: 15.0,
+  initialTimerDuration: Duration(minutes: 5),
+  controller: controller,
+  showControls: true,
+)
+</code></pre>
+<p><img src="./assets/images/timer.gif" alt="Timer"></p>
+<h3 id="stopwatch">Stopwatch</h3>
+<pre class="language-dart"><code class="language-dart">final controller = ClockController();
+
+ClockWidget.stopwatch(
+  clockSize: 15.0,
+  controller: controller,
+  showControls: true,
+)
+</code></pre>
+<p><img src="./assets/images/stopwatch.gif" alt="Stopwatch"></p>
+<h3 id="static-time-display">Static Time Display</h3>
+<pre class="language-dart"><code class="language-dart">ClockWidget.static(
+  staticTime: DateTime(2023, 12, 25, 14, 30, 0), // 2:30 PM or DateTime.now()
+  clockSize: 15.0,
+  animateToPosition: true,
+)
+</code></pre>
+<p><img src="./assets/images/static.gif" alt="Static"></p>
+<h2 id="-customization-examples">🎨 Customization Examples</h2>
+<h3 id="custom-styled-clock">Custom Styled Clock</h3>
+<pre class="language-dart"><code class="language-dart">ClockWidget.clock(
+  clockSize: 15.0,
+  colors: ClockColors(
+    background: Colors.white,
+    topShadow: Colors.red,
+    bottomShadow: Colors.yellow,
+    innerShadow: Colors.blue,
+    clockFace: Colors.purple,
+    hand: Colors.lime,
+    border: Colors.teal,
+    periodColors: PeriodColors(
+    activeBackground: Colors.blue,
+    inactiveBackground: Colors.red,
+    ),
+  ),
+  twelveHourFormat: true,
+  shadow: true,
+  borderWidth: 2.0,
+  handWidth: 2.0,
+)
+</code></pre>
+<p><img src="./assets/images/customized_clock.gif" alt="Static"></p>
+<h2 id="-controller-usage">🎮 Controller Usage</h2>
+<h3 id="programmatic-control">Programmatic Control</h3>
+<pre class="language-dart"><code class="language-dart">final controller = ClockController();
+
+// Listen to state changes
+controller.isRunning.addListener(() {
+  print('Running: ${controller.isRunning.value}');
+});
+
+controller.currentDuration.addListener(() {
+  print('Duration: ${controller.currentDuration.value}');
+});
+
+// Control actions
+controller.onStart?.call();    // Start timer/stopwatch
+controller.onPause?.call();    // Pause timer/stopwatch
+controller.onReset?.call();    // Reset timer/stopwatch
+</code></pre>
+<h3 id="integration-with-ui">Integration with UI</h3>
+<pre class="language-dart"><code class="language-dart">ValueListenableBuilder&lt;Duration&gt;(
+  valueListenable: controller.currentDuration,
+  builder: (context, duration, child) {
+    return Text(
+      'Remaining: ${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}',
+      style: TextStyle(fontSize: 16),
+    );
+  },
+)
+</code></pre>
+<h2 id="-all-properties">📐 All Properties</h2>
+<h3 id="clockwidget-properties">ClockWidget Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clockSize</code></td>
+<td><code>double</code></td>
+<td><code>20.0</code></td>
+<td>Base size for clock segments</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td><code>double?</code></td>
+<td><code>null</code></td>
+<td>Custom height for the widget</td>
+</tr>
+<tr>
+<td><code>colors</code></td>
+<td><code>ClockColors</code></td>
+<td><code>ClockColors()</code></td>
+<td>Color customization</td>
+</tr>
+<tr>
+<td><code>twelveHourFormat</code></td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td>Use 12-hour format with AM/PM</td>
+</tr>
+<tr>
+<td><code>shadow</code></td>
+<td><code>bool</code></td>
+<td><code>true</code></td>
+<td>Enable shadow effects</td>
+</tr>
+<tr>
+<td><code>borderWidth</code></td>
+<td><code>double</code></td>
+<td><code>2.0</code></td>
+<td>Clock border width</td>
+</tr>
+<tr>
+<td><code>handWidth</code></td>
+<td><code>double</code></td>
+<td><code>2.0</code></td>
+<td>Clock hand width</td>
+</tr>
+<tr>
+<td><code>showControls</code></td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td>Show control buttons</td>
+</tr>
+<tr>
+<td><code>animateToPosition</code></td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td>Animate to position (static mode)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="clockcolors-properties">clockColors Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>background</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.transparent</code></td>
+<td>Widget background</td>
+</tr>
+<tr>
+<td><code>clockFace</code></td>
+<td><code>Color</code></td>
+<td><code>Color(0xFFffffff)</code></td>
+<td>Clock face color</td>
+</tr>
+<tr>
+<td><code>border</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.white</code></td>
+<td>Clock border color</td>
+</tr>
+<tr>
+<td><code>hand</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.black</code></td>
+<td>Clock hand color</td>
+</tr>
+<tr>
+<td><code>innerShadow</code></td>
+<td><code>Color</code></td>
+<td><code>Color(0xFFd0d0d0)</code></td>
+<td>Inner shadow color</td>
+</tr>
+<tr>
+<td><code>bottomShadow</code></td>
+<td><code>Color</code></td>
+<td><code>Color(0xFFd0d0d0)</code></td>
+<td>Bottom shadow color</td>
+</tr>
+<tr>
+<td><code>topShadow</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.white</code></td>
+<td>Top shadow color</td>
+</tr>
+</tbody>
+</table>
+<h3 id="periodcolors-properties">periodColors Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>activeText</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.white</code></td>
+<td>Active period text color</td>
+</tr>
+<tr>
+<td><code>activeBackground</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.black</code></td>
+<td>Active period background color</td>
+</tr>
+<tr>
+<td><code>inactiveText</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.white</code></td>
+<td>Inactive period text color</td>
+</tr>
+<tr>
+<td><code>inactiveBackground</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.grey</code></td>
+<td>Inactive period background color</td>
+</tr>
+</tbody>
+</table>
+<h3 id="controlbuttoncolors-properties">controlButtonColors Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>startBackground</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.black</code></td>
+<td>Start button background color</td>
+</tr>
+<tr>
+<td><code>pauseBackground</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.black</code></td>
+<td>Pause button background color</td>
+</tr>
+<tr>
+<td><code>resetBackground</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.black</code></td>
+<td>Reset button background color</td>
+</tr>
+<tr>
+<td><code>startText</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.white</code></td>
+<td>Start button text color</td>
+</tr>
+<tr>
+<td><code>pauseText</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.white</code></td>
+<td>Pause button text color</td>
+</tr>
+<tr>
+<td><code>resetText</code></td>
+<td><code>Color</code></td>
+<td><code>Colors.white</code></td>
+<td>Reset button text color</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-advanced-usage">🛠️ Advanced Usage</h2>
+<h3 id="custom-button-sizes">Custom Button Sizes</h3>
+<pre class="language-dart"><code class="language-dart">ClockWidget.timer(
+  clockSize: 15.0,
+  controller: controller,
+  showControls: true,
+  buttonWidth: 80.0,
+  buttonHeight: 40.0,
+  buttonFontSize: 14.0,
+  buttonPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+)
+</code></pre>
+<h3 id="responsive-layout">Responsive Layout</h3>
+<pre class="language-dart"><code class="language-dart">LayoutBuilder(
+  builder: (context, constraints) {
+    final clockSize = constraints.maxWidth / 25;
+    return ClockWidget.clock(
+      clockSize: clockSize,
+      twelveHourFormat: true,
+    );
+  },
+)
+</code></pre>
+<h2 id="-troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="clock-not-updating">Clock Not Updating?</h3>
+<pre class="language-dart"><code class="language-dart">// Make sure you're using the correct mode
+ClockWidget.clock() // For real-time updates
+ClockWidget.static() // For static time display
+</code></pre>
+<h3 id="controls-not-showing">Controls Not Showing?</h3>
+<pre class="language-dart"><code class="language-dart">// Enable controls explicitly
+ClockWidget.timer(
+  showControls: true, // ← This must be true
+  controller: controller,
+)
+</code></pre>
+<h3 id="animation-not-working">Animation Not Working?</h3>
+<pre class="language-dart"><code class="language-dart">// For static mode, enable animation
+ClockWidget.static(
+  animateToPosition: true, // ← Enable animation
+  staticTime: DateTime.now(),
+)
+</code></pre>
+<h2 id="-contributing">🤝 Contributing</h2>
+<p>We welcome contributions! Please feel free to:</p>
+<ol>
+<li>🐛 Report bugs</li>
+<li>💡 Suggest new features</li>
+<li>🔧 Submit pull requests</li>
+<li>📖 Improve documentation</li>
+</ol>
+<h2 id="-license">📜 License</h2>
+<p>MIT License - see <a href="LICENSE">LICENSE</a> for details.</p>
+<h2 id="-acknowledgments">🙏 Acknowledgments</h2>
+<p>Made with ❤️ by <a href="https://github.com/raian-ruku/custom_text_widget/blob/main/github.com/raian-ruku">Raian Ruku</a> for the Flutter community. Special thanks to all contributors and users!</p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="animated_digital_clock">
+  <span class="name"><a href="animated_digital_clock/">animated_digital_clock</a></span> 
+
+</dt>
+<dd>A Flutter package for a beautiful, customizable digital clock made of clocks.
+</dd>
+
+        </dl>
+      </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://github.com/raian-ruku/animated_digital_clock">animated_digital_clock package</a></li>
+</ol>
+
+    <h5 class="hidden-xs"><span class="package-name">animated_digital_clock</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="animated_digital_clock/">animated_digital_clock</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+</main>
+<footer>
+  <span class="no-break">
+    animated_digital_clock
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+
