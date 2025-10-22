@@ -125,7 +125,7 @@ enum ClockMode {
   stopwatch,
 
   /// Displays a static, non-updating time.
-  static
+  static,
 }
 
 /// A controller for the [ClockWidget] when in timer or stopwatch mode.
@@ -222,6 +222,18 @@ class ClockWidget extends StatefulWidget {
   /// Whether to animate the clock hands to their initial position in [ClockMode.static].
   final bool animateToPosition;
 
+  /// Whether to show the AM/PM period indicator when using 12-hour format.
+  final bool showPeriodIndicator;
+
+  /// Whether to show the hours component of the time.
+  final bool showHours;
+
+  /// Whether to show the minutes component of the time.
+  final bool showMinutes;
+
+  /// Whether to show the seconds component of the time.
+  final bool showSeconds;
+
   /// Creates a [ClockWidget] that displays the current time.
   const ClockWidget.clock({
     super.key,
@@ -244,6 +256,10 @@ class ClockWidget extends StatefulWidget {
     this.buttonHeight,
     this.buttonFontSize,
     this.buttonPadding,
+    this.showPeriodIndicator = true,
+    this.showHours = true,
+    this.showMinutes = true,
+    this.showSeconds = true,
   })  : mode = ClockMode.clock,
         initialTimerDuration = null,
         staticTime = null,
@@ -271,6 +287,10 @@ class ClockWidget extends StatefulWidget {
     this.buttonHeight,
     this.buttonFontSize,
     this.buttonPadding,
+    this.showPeriodIndicator = true,
+    this.showHours = true,
+    this.showMinutes = true,
+    this.showSeconds = true,
   })  : mode = ClockMode.timer,
         twelveHourFormat = false,
         staticTime = null,
@@ -296,6 +316,10 @@ class ClockWidget extends StatefulWidget {
     this.buttonHeight,
     this.buttonFontSize,
     this.buttonPadding,
+    this.showPeriodIndicator = true,
+    this.showHours = true,
+    this.showMinutes = true,
+    this.showSeconds = true,
   })  : mode = ClockMode.stopwatch,
         shadow = true,
         twelveHourFormat = false,
@@ -315,6 +339,10 @@ class ClockWidget extends StatefulWidget {
     this.handWidth = 2.0,
     required this.staticTime,
     this.animateToPosition = true,
+    this.showPeriodIndicator = true,
+    this.showHours = true,
+    this.showMinutes = true,
+    this.showSeconds = true,
   })  : mode = ClockMode.static,
         controller = null,
         showControls = false,
@@ -715,11 +743,7 @@ class _ClockWidgetState extends State<ClockWidget>
     final minutes = dateTime.minute;
     final seconds = dateTime.second;
 
-    _time = [hour, minutes, seconds]
-        .expand(
-          (val) => val.toString().padLeft(2, '0').split('').map(int.parse),
-        )
-        .toList();
+    _time = _getFilteredTimeDigits([hour, minutes, seconds]);
   }
 
   void _updateTimeDigitsFromDuration(Duration duration) {
@@ -727,7 +751,23 @@ class _ClockWidgetState extends State<ClockWidget>
     final minutes = duration.inMinutes.remainder(60);
     final seconds = duration.inSeconds.remainder(60);
 
-    _time = [hours, minutes, seconds]
+    _time = _getFilteredTimeDigits([hours, minutes, seconds]);
+  }
+
+  List<int> _getFilteredTimeDigits(List<int> timeComponents) {
+    final List<int> filteredComponents = [];
+
+    if (widget.showHours) {
+      filteredComponents.add(timeComponents[0]);
+    }
+    if (widget.showMinutes) {
+      filteredComponents.add(timeComponents[1]);
+    }
+    if (widget.showSeconds) {
+      filteredComponents.add(timeComponents[2]);
+    }
+
+    return filteredComponents
         .expand(
           (val) => val.toString().padLeft(2, '0').split('').map(int.parse),
         )
@@ -780,11 +820,7 @@ class _ClockWidgetState extends State<ClockWidget>
       hour = hour == 0 ? 12 : hour;
     }
 
-    return [hour, now.minute, now.second]
-        .expand(
-          (val) => val.toString().padLeft(2, '0').split('').map(int.parse),
-        )
-        .toList();
+    return _getFilteredTimeDigits([hour, now.minute, now.second]);
   }
 
   void _updateTime() {
@@ -924,9 +960,11 @@ class _ClockWidgetState extends State<ClockWidget>
         );
 
     // Calculate total width - include space for AM/PM if needed
-    double totalWidth = (clockSegmentW * 6) + (gap * 8) + (clockSize * 2);
+    double totalWidth = (clockSegmentW * _time.length) +
+        (gap * (_time.length + 2)) +
+        (clockSize * 2);
 
-    if (widget.twelveHourFormat) {
+    if (widget.twelveHourFormat && widget.showPeriodIndicator) {
       totalWidth += clockSize * 3 + gap * 2;
     }
 
@@ -970,8 +1008,11 @@ class _ClockWidgetState extends State<ClockWidget>
                     final digit = entry.value;
                     return Container(
                       margin: EdgeInsets.only(
-                        right: index == 5
-                            ? (widget.twelveHourFormat ? clockSize : gap)
+                        right: index == _time.length - 1
+                            ? (widget.twelveHourFormat &&
+                                    widget.showPeriodIndicator
+                                ? clockSize
+                                : gap)
                             : (index.isOdd ? clockSize : gap),
                       ),
                       width: clockSegmentW,
@@ -1001,8 +1042,9 @@ class _ClockWidgetState extends State<ClockWidget>
                     );
                   }),
 
-                  // AM/PM indicator if 12-hour format is enabled (original style)
-                  if (widget.twelveHourFormat) ...[
+                  // AM/PM indicator if 12-hour format is enabled and showPeriodIndicator is true
+                  if (widget.twelveHourFormat &&
+                      widget.showPeriodIndicator) ...[
                     SizedBox(width: gap),
                     _buildPeriodIndicator(),
                   ],

@@ -1,6 +1,6 @@
 name: animated_digital_clock
 description: "Customizable animated digital clock made from clocks"
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/raian-ruku/animated_digital_clock
 
 environment:

@@ -1,3 +1,8 @@
+## [1.1.0]
+
+- Added `showPeriodIndicator` property to control whether to show the AM/PM indicator
+- Added `showHours`, `showMinutes` & `showSeconds` property to control whether to show the hours, minuts or seconds for all modes (set to `true` by default)
+
 ## [1.0.0]
 
 - Initial release of `animated_digital_clock` package
